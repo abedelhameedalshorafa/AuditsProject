@@ -1,0 +1,238 @@
+﻿@model  List<AuditDto>
+
+<head>
+    <style>
+        body {
+            background-color: #f9f9fa
+        }
+
+        .flex {
+            -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto
+        }
+
+        @@media (max-width:991.98px) {
+            .padding {
+                padding: 1.5rem
+            }
+        }
+
+        @@media (max-width:767.98px) {
+            .padding {
+                padding: 1rem
+            }
+        }
+
+        .padding {
+            padding: 5rem
+        }
+
+        .card {
+            box-shadow: none;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            -ms-box-shadow: none
+        }
+
+        .pl-3,
+        .px-3 {
+            padding-left: 1rem !important
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid #d2d2dc;
+            border-radius: 0
+        }
+
+            .card .card-title {
+                color: #000000;
+                margin-bottom: 0.625rem;
+                text-transform: capitalize;
+                font-size: 0.875rem;
+                font-weight: 500
+            }
+
+            .card .card-description {
+                margin-bottom: .875rem;
+                font-weight: 400;
+                color: #76838f
+            }
+
+        p {
+            font-size: 0.875rem;
+            margin-bottom: .5rem;
+            line-height: 1.5rem
+        }
+
+        .table-responsive {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: -ms-autohiding-scrollbar
+        }
+        
+        .table,
+        .jsgrid .jsgrid-table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            background-color: transparent;
+            box-sizing:border-box;
+        }
+
+            .table thead th,
+            .jsgrid .jsgrid-table thead th {
+                border-top: 0;
+                border-bottom-width: 1px;
+                font-weight: 500;
+                font-size: .875rem;
+                text-transform: uppercase
+            }
+
+            .table td,
+            .jsgrid .jsgrid-table td {
+                font-size: 0.875rem;
+                padding: .875rem 0.9375rem
+            }
+
+        .badge {
+            border-radius: 0;
+            font-size: 12px;
+            line-height: 1;
+            padding: .375rem .5625rem;
+            font-weight: normal
+        }
+
+        .table-hover tbody tr td {
+            vertical-align: middle; 
+        }
+
+        .table th, .table td {
+            text-align: center; /* Center-aligns text in both headers and data */
+            padding: 15px; /* Adds uniform padding for a cleaner look */
+            vertical-align: middle; /* Centers the text vertically */
+
+        }
+
+
+
+        .section2_btn {
+            display: inline-block;
+            border-radius: 10px; /* Adjusted border radius */
+            padding: 10px 20px; /* Increased padding for better spacing */
+            width: auto; /* Allow width to be determined by content */
+            height: auto; /* Let height adjust to content */
+            color: #fff;
+            font-size: 14px; /* Adjusted font size */
+            text-decoration: none;
+            margin: 5px; /* Added margin for space between buttons */
+            text-align: center; /* Ensure text is centered */
+            transition: all 0.3s ease-in-out; /* Smooth hover transitions */
+        }
+
+        .btn1 {
+            background: #ff4157;
+            border: 1px solid #ff4157;
+        }
+
+        .btn2 {
+            background: #4285f4;
+            border: 1px solid #4285f4;
+        }
+
+        .btn3 {
+            background: #35d8a1;
+            border: 1px solid #35d8a1;
+        }
+
+        /* Optional hover effect for buttons */
+        .section2_btn:hover {
+            opacity: 0.85; /* Slightly reduce opacity on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="page-content page-container" id="page-content">
+        <div class="padding">
+            <div class="row container d-flex justify-content-center">
+                <div class="col-lg-8 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Audit List</h4>
+                            <div class="table-responsive">
+                                <br />
+                                <a class="section2_btn btn1" asp-action="Create">Create</a>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Action</th>
+                                            <th>EmployeeID </th>
+                                            <th>UserID</th>
+                                            <th>Timestamp</th>
+                                            <th>Details</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach(var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.Id</td>
+                                                <td>@item.Action</td>
+                                                <td>@item.EmployeeID</td>
+                                                <td>@item.UserID</td>
+                                                <td>@item.Timestamp</td>
+                                                <td><a class="section2_btn btn3" asp-route-id="@item.Id" asp-action="Details">Details</a></td>
+                                                <td><a class="section2_btn btn2" asp-route-id="@item.Id" asp-action="Edit">Update</a></td>
+                                                <td><a class="section2_btn btn1" data-id="@item.Id" href="javascript:void(0);">Delete</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.section2_btn.btn1').on('click', function () { // Fixed selector here
+            var id = $(this).data('id');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You won\'t be able to revert this!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    console.log("ss");
+                    // User clicked Yes, handle the deletion here
+                    window.location.href = '@Url.Action("Delete")' + '?id=' + id;
+                }
+            });
+        });
+    });
+</script>

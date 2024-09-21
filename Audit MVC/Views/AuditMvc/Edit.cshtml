@@ -1,0 +1,147 @@
+﻿@model AuditDto
+
+
+<head>
+    <style>
+        .stretch-card > .card {
+            width: 100%;
+            min-width: 100%;
+        }
+
+        body {
+            background-color: #f9f9fa
+        }
+
+        .flex {
+            -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto
+        }
+
+        @@media (max-width:991.98px) {
+            .padding {
+                padding: 1.5rem
+            }
+        }
+
+        @@media (max-width:767.98px) {
+            .padding {
+                padding: 1rem
+            }
+        }
+
+        .padding {
+            padding: 3rem
+        }
+
+        .card {
+            box-shadow: none;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            -ms-box-shadow: none
+        }
+
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 1px solid #3da5f;
+            border-radius: 0;
+        }
+
+            .card .card-body {
+                padding: 1.25rem 1.75rem;
+            }
+
+            .card .card-title {
+                color: #000000;
+                margin-bottom: 0.625rem;
+                text-transform: capitalize;
+                font-size: 0.875rem;
+                font-weight: 500;
+            }
+
+            .card .card-description {
+                margin-bottom: .875rem;
+                font-weight: 400;
+                color: #76838f;
+            }
+
+        .form-group label {
+            font-size: 0.875rem;
+            line-height: 1.4rem;
+            vertical-align: top;
+            margin-bottom: .5rem;
+        }
+
+        .form-control {
+            border: 1px solid #f3f3f3;
+            font-weight: 400;
+            font-size: 0.875rem;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <div class="page-content page-container" id="page-content">
+        <div class="padding">
+            <div class="row container d-flex justify-content-center">
+                <div class="col-lg-5 grid-margin stretch-card">
+                    <!--form mask starts-->
+                    <div class="card">
+                        <div class="card-body">
+                            <form asp-action="Edit" method="post" class="forms-sample">
+                                <input asp-for="Id" hidden />
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <label for="UserID">UserID:</label>
+                                    </div>
+                                    @if (ViewBag.Users != null)
+                                    {
+                                        <select asp-for="UserID" class="form-select border-0" style="height: 55px;" asp-items="@(new SelectList(ViewBag.Users, "Id", "Name"))"></select>
+                                    }
+                                    else
+                                    {
+                                        <p>No Users available.</p>
+                                    }
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <label for="EmployeeID">EmployeeID:</label>
+                                    </div>
+                                    @if (ViewBag.Employees != null)
+                                    {
+                                        <select asp-for="EmployeeID" class="form-select border-0" style="height: 55px;" asp-items="@(new SelectList(ViewBag.Employees, "Id", "Name"))"></select>
+                                    }
+                                    else
+                                    {
+                                        <p>No Employees available.</p>
+                                    }
+                                </div>
+                                <br />
+                                <div class="col-12">
+                                    <button class="btn btn-primary" type="submit">Edit</button>
+                                </div>
+                            </form>
+                            <br />
+                            <a class="btn btn-outline-primary" asp-action="Index">Go To Audits</a>
+                        </div>
+                    </div>
+                    <!--form mask ends-->
+                </div>
+
+            </div>
+        </div>
+        <!--form mask ends-->
+    </div>
+</body>
+<script type='text/javascript' src='https://code.jquery.com/jquery-1.11.0.js'></script>
+<script type='text/javascript' src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
